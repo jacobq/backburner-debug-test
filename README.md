@@ -1,57 +1,22 @@
 # backburner-debug-test
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This repro was created to aid in the process of figuring out the "right" way to enable backburner debugging.
 
-## Prerequisites
+* The [old way][old-guide] was to use set `Ember.run.backburner.DEBUG = true;`
+* [RFC176][rfc176] provided better options for most use cases of the `Ember` global, and the [ember-rfc176-data][rfc176-data] repository provides a handy reference and notes: `Ember.run.backburner` --> `import { _backburner } from '@ember/runloop';`
+* The [Debugging section of the Ember.js Guides >= 3.27][new-guide] shows:
+  ```js
+  // app/app.js
+  import { run } from '@ember/runloop';
+  run.backburner.DEBUG = true;
+  ```
+  However, this appears to also generate a deprecation warning on v3.28:
+  > DEPRECATION: Using `run.backburner` has been deprecated. Instead, import the value directly from @ember/runloop: `import { backburner } from '@ember/runloop';`
 
-You will need the following things properly installed on your computer.
+So who is "right"? It looks like the guides and deprecation warning may need to be updated to match the RFC176 data repo as that is the code that appears to "work".
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/)
-* [Yarn](https://yarnpkg.com/)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+[old-guide]: https://guides.emberjs.com/v3.26.0/configuring-ember/debugging/#toc_errors-within-emberrunlater-backburner
+[new-guide]: https://guides.emberjs.com/release/configuring-ember/debugging/#toc_errors-within-emberrunlater-backburner
+[rfc176]: https://github.com/emberjs/rfcs/blob/master/text/0176-javascript-module-api.md
+[rfc176-data]: https://github.com/ember-cli/ember-rfc176-data#new-modules-to-globals
 
-## Installation
-
-* `git clone <repository-url>` this repository
-* `cd backburner-debug-test`
-* `yarn install`
-
-## Running / Development
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Linting
-
-* `yarn lint`
-* `yarn lint:fix`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
