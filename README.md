@@ -15,6 +15,10 @@ This repro was created to aid in the process of figuring out the "right" way to 
 
 So who is "right"? It looks like the guides and deprecation warning may need to be updated to match the RFC176 data repo as that is the code that appears to "work".
 
+Looks like the ember-inspector does some gymnastics to figure out which one to use:
+https://github.com/emberjs/ember-inspector/blob/e6f5ecb0ab4a8cff27bc83912ccd0efe20cb6c4c/ember_debug/utils/ember/runloop.js
+
+
 [old-guide]: https://guides.emberjs.com/v3.26.0/configuring-ember/debugging/#toc_errors-within-emberrunlater-backburner
 [new-guide]: https://guides.emberjs.com/release/configuring-ember/debugging/#toc_errors-within-emberrunlater-backburner
 [rfc176]: https://github.com/emberjs/rfcs/blob/master/text/0176-javascript-module-api.md
