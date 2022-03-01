@@ -3,14 +3,16 @@ import Resolver from 'ember-resolver';
 import loadInitializers from 'ember-load-initializers';
 import config from 'backburner-debug-test/config/environment';
 
+const enableBBDebug = config.APP.ENABLE_BACKBURNER_DEBUG;
+
 // Old way
 import Ember from 'ember';
 try {
-  Ember.run.backburner.DEBUG = true;
+  Ember.run.backburner.DEBUG = enableBBDebug;
   console.log('Set via global (in your dreams)'); // <-- never gets here
   debugger;
 } catch(e) {
-  console.warn(`Tried to set "Ember.run.backburner.DEBUG = true;" but caught exception:`, e);
+  console.warn(`Tried to set "Ember.run.backburner.DEBUG = ${enableBBDebug};" but caught exception:`, e);
 }
 
 // Recommended by deprecation warning I saw in v3.28, which I think is erroneous.
@@ -28,7 +30,7 @@ if (backburner === undefined) {
 // Way that works and is specified in RFC176 data repo:
 // https://github.com/ember-cli/ember-rfc176-data#ember-rfc176-data
 import { _backburner } from '@ember/runloop';
-_backburner.DEBUG = true;
+_backburner.DEBUG = enableBBDebug;
 console.log(`Set _backburner.DEBUG = ${_backburner.DEBUG}`);
 
 export default class App extends Application {

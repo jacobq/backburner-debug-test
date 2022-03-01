@@ -1,7 +1,9 @@
 {{page-title "BackburnerDebugTest"}}
 
-Backburner debugging is <strong>{{this.isBackburnerDebuggingEnabled}}</strong>.
-
+Backburner debugging is <strong>{{this.isBackburnerDebuggingEnabled}}</strong>.<br>
 <button type="button" {{on "click" this.toggle}}>Toggle</button>
+Note: toggling this setting at runtime does <em>NOT</em> appear to have any effect.<br>
+
+<button type="button" {{on "click" this.blowUp}}>Throw exception in run.later() 💥</button>
 
 {{outlet}}
