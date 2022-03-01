@@ -37,6 +37,4 @@ export default class App extends Application {
   Resolver = Resolver;
 }
 
-console.log('app.js about to load initializers');
 loadInitializers(App, config.modulePrefix);
-console.log('app.js done');
