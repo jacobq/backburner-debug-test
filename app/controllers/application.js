@@ -19,9 +19,12 @@ export default class ApplicationController extends Controller {
   }
 
   @action blowUp() {
-    console.log('Calling run.later(...) with function that will throw exception');
+    console.log(
+      'Calling run.later(...) with function that will throw exception'
+    );
     later(() => {
       console.log('💥 get ready to go digging through the big stack trace');
+      // eslint-disable-next-line no-undef
       thisVarIsUndefined.noPropHere = 'boom';
     }, 10);
   }

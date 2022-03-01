@@ -8,11 +8,16 @@ const enableBBDebug = config.APP.ENABLE_BACKBURNER_DEBUG;
 // Old way
 import Ember from 'ember';
 try {
+  // eslint-disable-next-line ember/new-module-imports
   Ember.run.backburner.DEBUG = enableBBDebug;
   console.log('Set via global (in your dreams)'); // <-- never gets here
+  // eslint-disable-next-line no-debugger
   debugger;
-} catch(e) {
-  console.warn(`Tried to set "Ember.run.backburner.DEBUG = ${enableBBDebug};" but caught exception:`, e);
+} catch (e) {
+  console.warn(
+    `Tried to set "Ember.run.backburner.DEBUG = ${enableBBDebug};" but caught exception:`,
+    e
+  );
 }
 
 // Recommended by deprecation warning I saw in v3.28, which I think is erroneous.
@@ -24,7 +29,10 @@ try {
 //   So it fails to produce the correct suggestion when the name of the key to use when importing from the module differs from the original one.
 import { backburner } from '@ember/runloop'; // doesn't seem to warn/error but backburner is undefined
 if (backburner === undefined) {
-  console.warn(`Tried to "import { backburner } from '@ember/runloop';" but it was undefined.`, backburner);
+  console.warn(
+    `Tried to "import { backburner } from '@ember/runloop';" but it was undefined.`,
+    backburner
+  );
 }
 
 // Way that works and is specified in RFC176 data repo:
